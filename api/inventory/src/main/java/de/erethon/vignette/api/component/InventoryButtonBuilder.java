@@ -23,6 +23,7 @@ public class InventoryButtonBuilder extends ButtonBuilder<InventoryButtonBuilder
 
     private Material icon = Material.PAPER;
     private int number = 1;
+    private short durability = 0;
     private String[] lines;
     private boolean stealable;
 
@@ -53,6 +54,17 @@ public class InventoryButtonBuilder extends ButtonBuilder<InventoryButtonBuilder
     }
 
     /**
+     * Sets the attached durability to a value.
+     *
+     * @param durability the durability to set
+     * @return the builder
+     */
+    public InventoryButtonBuilder durability(short durability) {
+        this.durability = durability;
+        return this;
+    }
+
+    /**
      * Sets additional lines to the button.
      *
      * @param lines the additional lines to set
@@ -78,7 +90,7 @@ public class InventoryButtonBuilder extends ButtonBuilder<InventoryButtonBuilder
 
     @Override
     public InventoryButton build() {
-        InventoryButton button = new InventoryButton(icon, number, title, lines);
+        InventoryButton button = new InventoryButton(icon, number, durability, title, lines);
         button.setStealable(stealable);
         button.setSound(sound);
         button.setInteractionListener(interactionListener);

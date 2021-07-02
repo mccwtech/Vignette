@@ -58,18 +58,34 @@ public class InventoryButton implements Button<InventoryButton, InventoryGUI> {
      * 1 results in no number being used.
      * <p>
      * The behavior for 0 and negative values is undefined. In earlier Minecraft versions, they work and are displayed in red.
+     * @param durability the durability attached to this button
      * @param title  the title
      * @param lines  additional lines
      */
-    public InventoryButton(Material icon, int number, String title, String... lines) {
+    public InventoryButton(Material icon, int number, short durability, String title, String... lines) {
         itemStack = new ItemStack(icon);
         itemStack.setAmount(number);
+        itemStack.setDurability(durability);
         ItemMeta meta = getRawMeta();
         meta.setDisplayName(title);
         if (lines != null && lines.length != 0) {
             meta.setLore(Arrays.asList(lines));
         }
         setRawMeta(meta);
+    }
+
+    /**
+     * @param icon   the icon
+     * @param number the number attached to this button
+     * <p>
+     * 1 results in no number being used.
+     * <p>
+     * The behavior for 0 and negative values is undefined. In earlier Minecraft versions, they work and are displayed in red.
+     * @param title  the title
+     * @param lines  additional lines
+     */
+    public InventoryButton(Material icon, int number, String title, String... lines) {
+        this(icon, 1, (short) 0, title, lines);
     }
 
     /**
